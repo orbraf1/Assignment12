@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block  title %}
+    Assignment 9
+{% endblock %}
+{% block tohen %}
+    {{ super() }}
+    {% set pageName= 'Assignment 9' %}
+        <h1> Welcome to {{ pageName }} page </h1>
+    <br><br>
+    <h1> Find your username by email address: </h1>
+    <form action="/assignment9" method="GET">
+        Email Address: <input name="mail" type="email"> <br><br>
+        <input type="submit">
+    </form>
+    {% if p_name %}
+        <h2> Good to see you again, {{ p_name }}!</h2>
+    {% endif %}
+    {% if p_mail %}
+    <h2> Your mail is {{ p_mail }} </h2>
+    {% endif %}
+    {% if users_list %}
+        <h2> Couldn't find this email address, those are the registered users: {{ users_list }}</h2>
+    {% endif %}
+    <br><br><br><br><br>
+
+    {% if session.username %}
+        <h2> Logged in, {{ session.username }}!</h2>
+    {% else %}
+        <h1> Please log in! </h1>
+        <form action="/assignment9" method="POST">
+            Username: <input name="username" type="text">
+            Password: <input name="password" type="password">
+            <input type="submit">
+        </form>
+    {% endif %}
+{% endblock %}

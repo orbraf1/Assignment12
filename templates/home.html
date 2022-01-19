@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block  title %}
+    Home
+{% endblock %}
+{% block tohen %}
+    {{ super() }}
+    {% set pageName= 'Home' %}
+    <h1> Welcome to {{ pageName }} page </h1>
+    <h3> <a href="/assignment9"> Assignment 9 </a> </h3>
+{% endblock %}

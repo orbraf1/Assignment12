@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block  title %}
+    Assignment 10
+{% endblock %}
+{% block tohen %}
+    {{ super() }}
+    {% set pageName= 'Users' %}
+    <h1> Welcome to {{ pageName }} page </h1>
+    <h2>Message for the user:</h2>
+    {% for message in get_flashed_messages() %}
+        <h4>{{ message }}</h4>
+    {% endfor %}<br>
+    <h2> Insertion Form </h2>
+    <form action="/insert_user" method="POST">
+        Name: <input type="text" name="name" placeholder="Name"><br><br>
+        Email: <input type="email" name="email" placeholder="Email"><br><br>
+        <input type="submit" value="Insert">
+    </form>
+
+    <h2>Update form</h2>
+    <form action="/update_user" method="POST">
+        User id: <input type="number" name="user_id"><br><br>
+        Please insert the new values: <br><br>
+        Name: <input type="text" name="name" placeholder="Name"><br><br>
+        Email: <input type="email" name="email" placeholder="Email"><br><br>
+        <input type="submit" value="Update">
+    </form>
+    <h2>Deletion form</h2>
+    {% for user in users %}
+        <li>
+            <form action="/delete_user" method="POST" style="display: inline">
+                <input type="hidden" name="user_id" value="{{ user.user_id }}" >
+                <input type="submit" value="Delete">
+            </form>
+            Name: {{ user['name'] }}, Email: {{ user['email'] }} </li>
+    {% endfor %}
+    </ul>
+    <h2>Registered users:</h2>
+    <form action="/registered_users" method="GET">
+        <ul>
+            {% for user in users %}
+                <li> Name: {{ user['name'] }}, Email: {{ user['email'] }} </li>
+            {% endfor %}
+        </ul>
+    </form>
+{% endblock %}
